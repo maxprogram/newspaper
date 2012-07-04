@@ -1,0 +1,380 @@
+
+@import "mixins.less";
+
+// Colors
+
+@background:       @gray;
+@paperColor:       @grayLighter;
+@textColor:        @grayDark;
+@linkColor:        #08c;
+@linkColorHover:   darken(@linkColor, 15%);
+
+// Sizes
+
+                  // 5-column layout
+@columnWidth:     192px;
+@gutterWidth:     24px;
+@contentWidth:    @columnWidth * 5 + @gutterWidth * 4;
+@paperWidth:      @contentWidth + @gutterWidth * 2;
+@headerHeight:    96px;
+
+@shortArticle:    792px;
+@longArticle:     1188px;
+
+
+// Typography
+
+@baseFontSize:        13px;
+@h1-Size:             40px;
+@h2-Size:             25px;
+@h3-Size:             25px;
+@h4-Size:             118%;
+@titleFontSize:       65px;
+@baseLineHeight:      1.5em;
+@headLineHeight:      1.1em;
+
+@baseFontFamily:      "Lora", Times, "Times New Roman", serif;
+@titleFontFamily:     "Abril Fatface";
+@headFontFamily:      "Tinos";
+
+// Fonts
+
+@font-face {
+  font-family: 'Abril Fatface';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Abril Fatface'), local('AbrilFatface-Regular'), url('http://themes.googleusercontent.com/static/fonts/abrilfatface/v5/X1g_KwGeBV3ajZIXQ9VnDvn8qdNnd5eCmWXua5W-n7c.woff') format('woff');
+}
+@font-face {
+  font-family: 'Tinos';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Tinos'), url('http://themes.googleusercontent.com/static/fonts/tinos/v4/C8vzv480UKDveCPk8l9XHQ.woff') format('woff');
+}
+@font-face {
+  font-family: 'Tinos';
+  font-style: normal;
+  font-weight: bold;
+  src: local('Tinos Bold'), local('Tinos-Bold'), url('http://themes.googleusercontent.com/static/fonts/tinos/v4/r7ygpzWtF3nxLEGd26jZfvesZW2xOQ-xsNqO47m55DA.woff') format('woff');
+}
+@font-face {
+  font-family: 'Tinos';
+  font-style: italic;
+  font-weight: bold;
+  src: local('Tinos Bold Italic'), local('Tinos-BoldItalic'), url('http://themes.googleusercontent.com/static/fonts/tinos/v4/S7imToYaQDRqHLMz0Hj4eBsxEYwM7FgeyaSgU71cLG0.woff') format('woff');
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Lora'), url('http://themes.googleusercontent.com/static/fonts/lora/v5/5-AYViExptypIdFoLKAxTA.woff') format('woff');
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: bold;
+  src: local('Lora Bold'), local('Lora-Bold'), url('http://themes.googleusercontent.com/static/fonts/lora/v5/XpaepWHcooQHSRnzoohUng.woff') format('woff');
+}
+@font-face {
+  font-family: 'Volkhov';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Volkhov Regular'), local('Volkhov-Regular'), url('http://themes.googleusercontent.com/static/fonts/volkhov/v5/J0G-xR46MCQ1NwlKplDuiA.woff') format('woff');
+}
+@font-face {
+  font-family: 'Volkhov';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Volkhov Bold'), local('Volkhov-Bold'), url('http://themes.googleusercontent.com/static/fonts/volkhov/v5/bfl1JD3mxnmq4NrdCJOHxRsxEYwM7FgeyaSgU71cLG0.woff') format('woff');
+}
+
+
+// --------------------------------------------
+// MAIN FORMATING
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  font-family: @baseFontFamily;
+  font-size: @baseFontSize;
+  line-height: @baseLineHeight;
+  color: @textColor;
+  background-color: @background;
+}
+
+*::selection {background: @grayDarker; color: @white;}
+
+img {
+  border: 0px;
+}
+
+a {
+  color: @linkColor;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+    color: @linkColorHover;}
+  &:visited {color: @linkColor;}
+}
+
+
+
+// --------------------------------------------
+// STRUCTURE
+
+#main {
+  position: relative;
+}
+
+.container {
+  width: @paperWidth;
+  margin: 0 auto;
+  background: @paperColor;
+}
+
+.header {
+  width: @contentWidth;
+  height: @headerHeight;
+  margin: 0 @gutterWidth;
+  text-align: center;
+  .title {
+    font-family: @titleFontFamily;
+    font-size: @titleFontSize;
+    line-height: 1.5em;
+  }
+}
+
+.headerBar {
+  width: @paperWidth;
+  height: @gutterWidth;
+  margin-bottom: @gutterWidth / 2;
+  border-top: 1px solid @black;
+  border-bottom: 2px solid @black;
+  text-align: center;
+}
+
+.content {
+  width: @contentWidth;
+  margin: 0 @gutterWidth;
+  padding-bottom: @gutterWidth;
+}
+
+
+// --------------------------------------------
+// ARTICLE LAYOUTS
+
+@lineSeparator: 1px solid @black;
+
+.article {
+  display: block;
+  float: left;
+  .clearfix;
+  margin: @gutterWidth / 2;
+  padding: @gutterWidth / 2;
+  padding-top: 0;
+  
+  &.short {
+    height: @shortArticle;
+  }
+  &.long {
+    height: @longArticle;
+  }
+  
+  &.col1 {
+    width: @columnWidth;
+  }
+  &.col3 {
+    width: @columnWidth * 3 + @gutterWidth * 2;
+    .text {
+      .content-columns(3, @gutterWidth);
+    }
+  }
+  
+  &.left {
+    margin-left: 0;
+    margin-right: @gutterWidth / 2 - 1;
+    padding-left: 0;
+    border-right: @lineSeparator;
+  }
+  &.cen {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  &.right {
+    margin-right: 0;
+    margin-left: @gutterWidth / 2 - 1;
+    padding-right: 0;
+    border-left: @lineSeparator;
+  }
+  
+  .text {
+    padding-top: 5px;
+    border-bottom: @lineSeparator;
+  }
+  .author {
+    width: @columnWidth;
+    text-align: center;
+    font-weight: bold;
+    font-size: 90%;
+    padding-bottom: 5px;
+  }
+  hr {
+    margin: 0 auto;
+    margin-bottom: 10px;
+    border: 0;
+    border-top: 1px solid @black;
+    width: 0.5 * @columnWidth;
+  }
+}
+
+img {
+  float: left;
+  margin-bottom: 10px;
+  
+  .col1 {
+    width: @columnWidth;
+  }
+  .col2 {
+    width: @columnWidth * 2 + @gutterWidth;
+  }
+  .col3 {
+    width: @columnWidth * 3 + @gutterWidth * 2;
+  }
+}
+
+
+// --------------------------------------------
+// ARTICLE FORMATING
+
+
+// BODY TEXT
+// ---------
+
+p {
+  margin: 0;
+  font-family: @baseFontFamily;
+  font-size: @baseFontSize;
+  line-height: @baseLineHeight;
+  text-align: justify;
+  text-indent: 15px;
+  //.hyphenate();
+  
+}
+.lead {
+  margin-bottom: @baseLineHeight;
+  font-size: 20px;
+  font-weight: 200;
+  line-height: @baseLineHeight * 1.5;
+}
+
+.ls-1 {letter-spacing: 1px;}
+.ls-2 {letter-spacing: 2px;}
+
+// HEADINGS
+// --------
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: @headFontFamily;
+  color: @grayDark;
+  line-height: @headLineHeight;
+  text-rendering: optimizelegibility; // Fix the character spacing for headings
+  margin-bottom: 10px;
+}
+h1 {
+  text-align: center;
+  font-size: @h1-Size;
+  font-weight: bold;
+}
+h2 {
+  text-align: center;
+  font-size: @h2-Size;
+  font-weight: bold;
+  font-style: italic;
+}
+h3 {
+  font-size: @h3-Size;
+  font-weight: normal;
+}
+
+// MISC
+// --------
+
+hr {
+  margin: @baseLineHeight 0;
+  border: 0;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid @white;
+}
+
+strong {
+  font-weight: bold;
+}
+em {
+  font-style: italic;
+}
+.muted {
+  color: @grayLight;
+}
+
+abbr { // Abbreviations and acronyms
+  font-size: 90%;
+  text-transform: uppercase;
+  border-bottom: 1px dotted #ddd;
+  cursor: help;
+}
+
+blockquote {
+  padding: 0 0 0 15px;
+  margin: 0 0 @baseLineHeight;
+  border-left: 5px solid @grayLighter;
+  p {
+    margin-bottom: 0;
+    #font > .shorthand(16px,300,@baseLineHeight * 1.25);
+  }
+  small {
+    display: block;
+    line-height: @baseLineHeight;
+    color: @grayLight;
+    &:before {
+      content: '\2014 \00A0';
+    }
+  }
+
+  // Float right with text-align: right
+  &.pull-right {
+    float: right;
+    padding-left: 0;
+    padding-right: 15px;
+    border-left: 0;
+    border-right: 5px solid @grayLighter;
+    p,
+    small {
+      text-align: right;
+    }
+  }
+}
+
+q:before, // Quotes
+q:after,
+blockquote:before, 
+blockquote:after {
+  content: "";
+}
+
+small {
+  font-size: 100%;
+}
+cite {
+  font-style: normal;
+}
+
+
+
+
